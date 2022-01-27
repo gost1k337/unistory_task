@@ -4,6 +4,7 @@ import { BooksModule } from './books/books.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { User } from './users/users.entity';
+import { Book } from './books/books.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { User } from './users/users.entity';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [User],
+      entities: [User, Book],
       synchronize: true,
     }),
     UsersModule,

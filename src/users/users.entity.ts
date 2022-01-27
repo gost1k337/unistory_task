@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
+import { Book } from '../books/books.entity';
 
 interface UserCreationAttrs {
   email: string;
@@ -33,4 +34,7 @@ export class User implements UserCreationAttrs {
   @ApiProperty({ example: 'false', description: 'Deleted or not' })
   @Column({ default: false })
   isDeleted: boolean;
+
+  @OneToMany(() => Book, (book) => book.user)
+  books: Book[];
 }
