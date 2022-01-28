@@ -14,6 +14,19 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
+  async get(id: number): Promise<User | null> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['books'],
+    });
+
+    if (user && !user.isDeleted) {
+      return user;
+    }
+
+    throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+  }
+
   async createUser(dto: CreateUserDto): Promise<User | null> {
     const candidate = await this.findByEmail(dto.email);
 

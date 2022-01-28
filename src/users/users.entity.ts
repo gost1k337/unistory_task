@@ -35,6 +35,7 @@ export class User implements UserCreationAttrs {
   @Column({ default: false })
   isDeleted: boolean;
 
+  @ApiProperty({ description: 'User books' })
   @OneToMany(() => Book, (book) => book.user)
   books: Book[];
 }

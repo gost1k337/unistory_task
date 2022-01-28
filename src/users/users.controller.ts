@@ -22,6 +22,14 @@ import { AddSubscriptionDto } from './dto/add-subscription.dto';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @ApiOperation({ summary: 'Get user' })
+  @ApiResponse({ status: 200, type: User })
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get(':id')
+  async get(@Param('id') id: number) {
+    return await this.userService.get(id);
+  }
+
   @ApiOperation({ summary: 'Creating user' })
   @ApiResponse({ status: 201, type: User })
   @UseInterceptors(ClassSerializerInterceptor)
