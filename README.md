@@ -29,34 +29,32 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
+$ cp .env.sample .env
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
+
+# build docker
+$ make build
+
+# run docker container
+$ make start # to run change POSTGRES_HOST in .env to postgres
+
+# down docker container
+$ make down
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
 
 ## Support
 
