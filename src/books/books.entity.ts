@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from '../users/users.entity';
+import { JoinColumn } from 'typeorm';
 
 interface BookCreationAttrs {
   name: string;
@@ -15,7 +16,7 @@ export class Book implements BookCreationAttrs {
   id: number;
 
   @ApiProperty({ example: 'Clean code', description: 'Book name' })
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @ApiProperty({ example: 'Robert Martin', description: 'Author name' })
@@ -26,6 +27,11 @@ export class Book implements BookCreationAttrs {
   @Column()
   content: string;
 
+  @ApiProperty({ example: '1', description: 'Book user id' })
+  @Column({ name: 'user_id', nullable: true })
+  userId: number;
+
   @ManyToOne(() => User, (user) => user.books)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 }
